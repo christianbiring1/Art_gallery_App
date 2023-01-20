@@ -15,9 +15,9 @@ class LoginForm extends Component {
 
     const { user } = this.state;
     if (user.email.trim() === '')
-      errors.useremail = 'The email field is required.';
+      errors.email = 'The email field is required.';
     if (user.password.trim() === '')
-      errors.userpassword = 'Password field is required.'
+      errors.password = 'Password field is required.'
 
     return Object.keys(errors).length === 0 ? null : errors;
   };
@@ -30,11 +30,11 @@ class LoginForm extends Component {
   }
 
   validateProperty = input => {
-    if (input.name === 'useremail') {
+    if (input.name === 'email') {
       if (input.value.trim() === '') return 'User email is required!'
     }
 
-    if (input.name === 'userpassword') {
+    if (input.name === 'password') {
       if (input.value.trim() === '') return 'Password is required!'
     }
   };
@@ -69,7 +69,7 @@ class LoginForm extends Component {
               value={user.email}
               onChange={this.handleChange}
             />
-            {errors['useremail'] && <div className='alert alert-danger'>{errors.useremail}</div>}
+            {errors['email'] && <div className='alert alert-danger'>{errors.email}</div>}
           </div>
           <div className="form-group">
             <label htmlFor="password">Password</label>
@@ -81,7 +81,7 @@ class LoginForm extends Component {
               value={user.password}
               onChange={this.handleChange}
             />
-            {errors['userpassword'] && <div className='alert alert-danger'>{errors.userpassword}</div>}
+            {errors['password'] && <div className='alert alert-danger'>{errors.password}</div>}
           </div>
           <button type="submit" className='btn btn-primary'>Login</button>
         </form>
