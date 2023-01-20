@@ -26,15 +26,30 @@ class LoginForm extends Component {
     e.preventDefault();
     const errors = this.validate();
     this.setState({ errors: errors || {} });
-    console.log(errors);
     if (errors) return;
-    console.log('Submitted!')
   }
 
+  validateProperty = input => {
+    if (input.name === 'useremail') {
+      if (input.value.trim() === '') return 'User email is required!'
+    }
+
+    if (input.name === 'userpassword') {
+      if (input.value.trim() === '') return 'Password is required!'
+    }
+  };
+
   handleChange = ({ currentTarget: input }) => {
+    const errors = { ...this.state.errors };
+    const errorMessage = this.validateProperty(input);
+    if (errorMessage) errors[input.name] = errorMessage;
+    else delete errors[input.name];
+
+
     const user = { ...this.state.user };
     user[input.name] = input.value;
-    this.setState({ user });
+
+    this.setState({ user, errors });
   }
   render() {
     const { user, errors } = this.state;
@@ -54,7 +69,7 @@ class LoginForm extends Component {
               value={user.email}
               onChange={this.handleChange}
             />
-            {errors && <span className='alert alert-danger'>{errors.useremail}</span>}
+            {errors['useremail'] && <div className='alert alert-danger'>{errors.useremail}</div>}
           </div>
           <div className="form-group">
             <label htmlFor="password">Password</label>
@@ -66,7 +81,7 @@ class LoginForm extends Component {
               value={user.password}
               onChange={this.handleChange}
             />
-            {errors && <span className='alert alert-danger'>{errors.userpassword}</span>}
+            {errors['userpassword'] && <div className='alert alert-danger'>{errors.userpassword}</div>}
           </div>
           <button type="submit" className='btn btn-primary'>Login</button>
         </form>
