@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Joi from 'joi-browser';
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 
 class LoginForm extends Component {
@@ -10,7 +11,16 @@ class LoginForm extends Component {
     errors: {}
   }
 
+  schema = {
+    email: Joi.string().required(),
+    password: Joi.string().required()
+  };
+
   validate = () => {
+    const result = Joi.validate(this.state.user, this.schema, { abortEarly: false });
+    console.log(result);
+
+
     const errors = {};
 
     const { user } = this.state;
