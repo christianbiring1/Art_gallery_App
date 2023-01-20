@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Joi from 'joi-browser';
 import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '../firebase-config';
 
 class LoginForm extends Component {
   state = {
@@ -12,41 +13,37 @@ class LoginForm extends Component {
   }
 
   schema = {
-    email: Joi.string().required(),
-    password: Joi.string().required()
+    email: Joi.string().required().email().label('Email'),
+    password: Joi.string().required().min(6).label('Password')
   };
 
   validate = () => {
     const result = Joi.validate(this.state.user, this.schema, { abortEarly: false });
-    console.log(result);
-
+    if (!result.error) return null;
 
     const errors = {};
-
-    const { user } = this.state;
-    if (user.email.trim() === '')
-      errors.email = 'The email field is required.';
-    if (user.password.trim() === '')
-      errors.password = 'Password field is required.'
-
-    return Object.keys(errors).length === 0 ? null : errors;
+    for (let item of result.error.details)
+      errors[item.path[0]] = item.message;
+    return errors;
   };
 
-  handleSubmit = e => {
+  handleSubmit = async (e) => {
     e.preventDefault();
     const errors = this.validate();
     this.setState({ errors: errors || {} });
     if (errors) return;
+    //  call the server
+
+    const { email, password } = this.state.user;
+    const user = await createUserWithEmailAndPassword(auth, email, password);
+    console.log(user);
   }
 
-  validateProperty = input => {
-    if (input.name === 'email') {
-      if (input.value.trim() === '') return 'User email is required!'
-    }
-
-    if (input.name === 'password') {
-      if (input.value.trim() === '') return 'Password is required!'
-    }
+  validateProperty = ({ name, value }) => {
+    const obj = { [name]: value };
+    const schema = { [name]: this.schema[name] };
+    const { error } = Joi.validate(obj, schema);
+    return error ? error.details[0].message : null;
   };
 
   handleChange = ({ currentTarget: input }) => {
@@ -93,7 +90,13 @@ class LoginForm extends Component {
             />
             {errors['password'] && <div className='alert alert-danger'>{errors.password}</div>}
           </div>
-          <button type="submit" className='btn btn-primary'>Login</button>
+          <button
+            type="submit"
+            className='btn btn-primary'
+            disabled={this.validate()}
+          >
+            Login
+          </button>
         </form>
       </React.Fragment>
     );
