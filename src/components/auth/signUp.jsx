@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Joi from 'joi-browser';
-import { createUserWithEmailAndPassword } from 'firebase/auth'
-import { auth } from '../firebase-config';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../firebase-config';
 
-class LoginForm extends Component {
+class SignUpForm extends Component {
   state = {
     user: {
       email: '',
@@ -63,7 +63,7 @@ class LoginForm extends Component {
 
     return (
       <React.Fragment>
-        <h1>Login Form</h1>
+        <h1>Sign up Form</h1>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label htmlFor="email">Email address</label>
@@ -103,4 +103,4 @@ class LoginForm extends Component {
   }
 }
 
-export default LoginForm;
+export default SignUpForm;
