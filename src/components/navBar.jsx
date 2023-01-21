@@ -2,6 +2,12 @@ import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 
 const NavBar = ({ user }) => {
+  let handler = '';
+  if (user) {
+    const { email } = user;
+    handler = email.slice(0, 3).toUpperCase();
+  }
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <Link className="navbar-brand" to="/">Art_Gallery</Link>
@@ -20,7 +26,9 @@ const NavBar = ({ user }) => {
           )}
           {user && (
             <React.Fragment>
-              <NavLink className="nav-item nav-link" to="/profile">{user.email} </NavLink>
+              <NavLink className="nav-item nav-link" to="/profile">
+                <span>{handler}</span>
+              </NavLink>
               <NavLink className="nav-item nav-link" to="new"> Create Post </NavLink>
               <NavLink className="nav-item nav-link" to="log_out"> Logout </NavLink>
             </React.Fragment>

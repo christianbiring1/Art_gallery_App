@@ -1,9 +1,13 @@
 import React, { useEffect } from 'react';
+import { signOut } from 'firebase/auth';
+import { auth } from '../../firebase-config';
 
 const Logout = () => {
   useEffect(() => {
-    localStorage.removeItem("token");
-    window.location = "/";
+    signOut(auth).then(() => {
+      localStorage.removeItem("token");
+      window.location = "/";
+    })
   }, []);
   return null;
 }

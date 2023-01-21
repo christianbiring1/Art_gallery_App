@@ -19,7 +19,6 @@ function App() {
       const jwt = localStorage.getItem("token");
       const user = jwtDecode(jwt);
       setUser(user);
-      console.log(user);
     } catch (error) { }
   }, []);
   return (

@@ -28,9 +28,8 @@ class SignInForm extends Form {
       window.location = "/";
     } catch (error) {
       const errorCode = error.code;
-      const errorMessage = error.message;
       const errors = { ...this.state.errors };
-      errors.email = errorMessage;
+      errors.email = errorCode;
       this.setState({ errors });
     }
   }
