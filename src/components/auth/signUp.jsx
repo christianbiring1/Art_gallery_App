@@ -7,14 +7,16 @@ class SignUpForm extends Component {
   state = {
     user: {
       email: '',
-      password: ''
+      password: '',
+      password_confirm: ''
     },
     errors: {}
   }
 
   schema = {
     email: Joi.string().required().email().label('Email'),
-    password: Joi.string().required().min(6).label('Password')
+    password: Joi.string().required().min(6).label('Password'),
+    password_confirm: Joi.string().required().min(6)
   };
 
   validate = () => {
@@ -29,12 +31,19 @@ class SignUpForm extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
+    const { email, password, password_confirm } = this.state.user;
     const errors = this.validate();
     this.setState({ errors: errors || {} });
     if (errors) return;
+    if (password !== password_confirm) {
+      const errors = { ...this.state.errors };
+      errors.password_confirm = 'The password should match';
+      this.setState({ errors });
+      console.log(errors);
+      return;
+    };
     //  call the server
 
-    const { email, password } = this.state.user;
     const user = await createUserWithEmailAndPassword(auth, email, password);
     console.log(user);
   }
@@ -89,6 +98,18 @@ class SignUpForm extends Component {
               onChange={this.handleChange}
             />
             {errors['password'] && <div className='alert alert-danger'>{errors.password}</div>}
+          </div>
+          <div className="form-group">
+            <label htmlFor="password_confirmation">Password Confirmation</label>
+            <input
+              type="password"
+              className='form-control'
+              id='password_confirmation'
+              name='password_confirm'
+              value={user.password_confirm}
+              onChange={this.handleChange}
+            />
+            {errors['password_confirm'] && <div className='alert alert-danger'>{errors.password_confirm}</div>}
           </div>
           <button
             type="submit"
