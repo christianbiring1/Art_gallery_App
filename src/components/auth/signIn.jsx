@@ -1,9 +1,9 @@
 import React from 'react';
-import { auth } from '../../firebase-config';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { redirect } from 'react-router-dom';
 import Joi from 'joi-browser';
 import Input from '../common/Input';
 import Form from '../common/Form';
+import { login } from './authServices/logIn';
 
 class SignInForm extends Form {
   state = {
@@ -14,29 +14,34 @@ class SignInForm extends Form {
     errors: {}
   }
 
+
   schema = {
     email: Joi.string().email().required().label('Email'),
     password: Joi.string().required().min(6).label('Password')
   }
 
   doSubmit = async () => {
-    const { email, password } = this.state.data;
-    console.log(email, password);
-    await signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user);
-      })
-      .catch((error) => {
-        // const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(this.state.errors);
-        console.log(errorMessage);
-      })
+    try {
+      const { email, password } = this.state.data;
+      const { _tokenResponse } = await login(email, password);
+      localStorage.setItem("token", _tokenResponse['idToken']);
+      localStorage.setItem('isAuth', true);
+      const loader = async () => {
+      }
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      const errors = { ...this.state.errors };
+      errors.email = errorMessage;
+      this.setState({ errors });
+    }
+    //     console.log(user, 'Is signed In!');
+    //     localStorage.setItem("isAuth", true);
+    //     this.props.setIsAuth(true);
   }
   render() {
     const { data, errors } = this.state;
-
+    const token = localStorage.getItem("token");
 
     return (
       <div className='d-flex flex-column align-items-center justify-content-center'>
