@@ -81,7 +81,8 @@ class SignUpForm extends Form {
             Sign Up
           </button>
           <div className='form-group'>
-            Already have an account? <Link to="/sign_in">Sign In</Link></div>
+            Already have an account? <Link to="/sign_in">Log In</Link>
+          </div>
         </form>
       </div>
     );

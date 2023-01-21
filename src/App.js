@@ -5,6 +5,7 @@ import Home from './components/home';
 import NavBar from './components/navBar';
 import SignInForm from './components/auth/signIn';
 import SignUpForm from './components/auth/signUp';
+import ForgetPassword from './components/auth/Forgetpassword';
 import Logout from './components/auth/logout';
 import CreatePost from './components/createItem';
 import NotFound from './components/ntFound';
@@ -28,6 +29,7 @@ function App() {
         <Switch>
           <Route path="/sign_up" component={SignUpForm} />
           <Route path="/sign_in" component={SignInForm} />
+          <Route path="/forget_password" component={ForgetPassword} />
           <Route path="/log_out" component={Logout} />
           <Route path="/posts" component={Home} />
           <Route path="/new" component={CreatePost} />

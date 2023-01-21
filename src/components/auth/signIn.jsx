@@ -1,5 +1,5 @@
 import React from 'react';
-import { redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Joi from 'joi-browser';
 import Input from '../common/Input';
 import Form from '../common/Form';
@@ -62,6 +62,9 @@ class SignInForm extends Form {
           >
             Log In
           </button>
+          <div className='form-group'>
+            <Link to="/forget_password">Forget Password?</Link>
+          </div>
         </form>
       </div>
     );
