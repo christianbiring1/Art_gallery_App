@@ -1,6 +1,6 @@
-import { auth } from "../../../firebase-config"
-import { signInWithEmailAndPassword } from "firebase/auth"
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../../firebase-config';
 
-export function login(email, password) {
+export default function login(email, password) {
   return signInWithEmailAndPassword(auth, email, password);
 }

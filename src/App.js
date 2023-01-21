@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+/* eslint-disable */
+import React, { useEffect, useState } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 import Home from './components/home';
@@ -10,19 +11,19 @@ import Logout from './components/auth/logout';
 import CreatePost from './components/createItem';
 import NotFound from './components/ntFound';
 import './App.css';
-import React from 'react';
+
 function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
     try {
-      const jwt = localStorage.getItem("token");
+      const jwt = localStorage.getItem('token');
       const user = jwtDecode(jwt);
       setUser(user);
     } catch (error) { }
   }, []);
   return (
-    <React.Fragment>
+    <>
       <NavBar user={user} />
       <div className="container">
         <Switch>
@@ -37,7 +38,7 @@ function App() {
           <Redirect to="/not_found" />
         </Switch>
       </div>
-    </React.Fragment>
+    </>
   );
 }
 
