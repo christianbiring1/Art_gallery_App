@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Joi from 'joi-browser';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase-config';
+import Form from '../common/Form';
 
-class SignUpForm extends Component {
+class SignUpForm extends Form {
   state = {
-    user: {
+    data: {
       email: '',
       password: '',
       password_confirm: ''
@@ -19,59 +21,25 @@ class SignUpForm extends Component {
     password_confirm: Joi.string().required().min(6)
   };
 
-  validate = () => {
-    const result = Joi.validate(this.state.user, this.schema, { abortEarly: false });
-    if (!result.error) return null;
 
-    const errors = {};
-    for (let item of result.error.details)
-      errors[item.path[0]] = item.message;
-    return errors;
-  };
-
-  handleSubmit = async (e) => {
-    e.preventDefault();
-    const { email, password, password_confirm } = this.state.user;
-    const errors = this.validate();
-    this.setState({ errors: errors || {} });
-    if (errors) return;
+  doSubmit = async () => {
+    //  Call the Server 
+    const { email, password, password_confirm } = this.state.data;
     if (password !== password_confirm) {
       const errors = { ...this.state.errors };
       errors.password_confirm = 'The password should match';
       this.setState({ errors });
-      console.log(errors);
       return;
     };
-    //  call the server
-
     const user = await createUserWithEmailAndPassword(auth, email, password);
     console.log(user);
   }
 
-  validateProperty = ({ name, value }) => {
-    const obj = { [name]: value };
-    const schema = { [name]: this.schema[name] };
-    const { error } = Joi.validate(obj, schema);
-    return error ? error.details[0].message : null;
-  };
-
-  handleChange = ({ currentTarget: input }) => {
-    const errors = { ...this.state.errors };
-    const errorMessage = this.validateProperty(input);
-    if (errorMessage) errors[input.name] = errorMessage;
-    else delete errors[input.name];
-
-
-    const user = { ...this.state.user };
-    user[input.name] = input.value;
-
-    this.setState({ user, errors });
-  }
   render() {
-    const { user, errors } = this.state;
+    const { data, errors } = this.state;
 
     return (
-      <React.Fragment>
+      <div className='d-flex flex-column align-items-center justify-content-center'>
         <h1>Sign up Form</h1>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
@@ -82,7 +50,7 @@ class SignUpForm extends Component {
               className='form-control'
               id='email'
               name='email'
-              value={user.email}
+              value={data.email}
               onChange={this.handleChange}
             />
             {errors['email'] && <div className='alert alert-danger'>{errors.email}</div>}
@@ -94,7 +62,7 @@ class SignUpForm extends Component {
               className='form-control'
               id='password'
               name='password'
-              value={user.password}
+              value={data.password}
               onChange={this.handleChange}
             />
             {errors['password'] && <div className='alert alert-danger'>{errors.password}</div>}
@@ -106,7 +74,7 @@ class SignUpForm extends Component {
               className='form-control'
               id='password_confirmation'
               name='password_confirm'
-              value={user.password_confirm}
+              value={data.password_confirm}
               onChange={this.handleChange}
             />
             {errors['password_confirm'] && <div className='alert alert-danger'>{errors.password_confirm}</div>}
@@ -116,10 +84,12 @@ class SignUpForm extends Component {
             className='btn btn-primary'
             disabled={this.validate()}
           >
-            Login
+            Sign Up
           </button>
+          <div className='form-group'>
+            Already have an account? <Link to="/sign_in">Sign In</Link></div>
         </form>
-      </React.Fragment>
+      </div>
     );
   }
 }
