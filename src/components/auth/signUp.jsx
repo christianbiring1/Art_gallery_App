@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Joi from 'joi-browser';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase-config';
+import Input from '../common/Input';
 import Form from '../common/Form';
 
 class SignUpForm extends Form {
@@ -42,43 +43,27 @@ class SignUpForm extends Form {
       <div className='d-flex flex-column align-items-center justify-content-center'>
         <h1>Sign up Form</h1>
         <form onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="email">Email address</label>
-            <input
-              autoFocus
-              type="email"
-              className='form-control'
-              id='email'
-              name='email'
-              value={data.email}
-              onChange={this.handleChange}
-            />
-            {errors['email'] && <div className='alert alert-danger'>{errors.email}</div>}
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              className='form-control'
-              id='password'
-              name='password'
-              value={data.password}
-              onChange={this.handleChange}
-            />
-            {errors['password'] && <div className='alert alert-danger'>{errors.password}</div>}
-          </div>
-          <div className="form-group">
-            <label htmlFor="password_confirmation">Password Confirmation</label>
-            <input
-              type="password"
-              className='form-control'
-              id='password_confirmation'
-              name='password_confirm'
-              value={data.password_confirm}
-              onChange={this.handleChange}
-            />
-            {errors['password_confirm'] && <div className='alert alert-danger'>{errors.password_confirm}</div>}
-          </div>
+          <Input
+            name="email"
+            value={data.email}
+            label="Email address"
+            onChange={this.handleChange}
+            errors={errors}
+          />
+          <Input
+            name="password"
+            value={data.password}
+            label="Password"
+            onChange={this.handleChange}
+            errors={errors}
+          />
+          <Input
+            name="password_confirm"
+            value={data.password_confirm}
+            label="Password Confirmation"
+            onChange={this.handleChange}
+            errors={errors}
+          />
           <button
             type="submit"
             className='btn btn-primary'
