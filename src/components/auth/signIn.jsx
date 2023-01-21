@@ -34,13 +34,9 @@ class SignInForm extends Form {
       errors.email = errorMessage;
       this.setState({ errors });
     }
-    //     console.log(user, 'Is signed In!');
-    //     localStorage.setItem("isAuth", true);
-    //     this.props.setIsAuth(true);
   }
   render() {
     const { data, errors } = this.state;
-    const token = localStorage.getItem("token");
 
     return (
       <div className='d-flex flex-column align-items-center justify-content-center'>

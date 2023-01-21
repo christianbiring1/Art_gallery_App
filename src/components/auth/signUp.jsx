@@ -32,8 +32,17 @@ class SignUpForm extends Form {
       this.setState({ errors });
       return;
     };
-    const user = await createUserWithEmailAndPassword(auth, email, password);
-    console.log(user);
+    try {
+      const { _tokenResponse } = await createUserWithEmailAndPassword(auth, email, password);
+      localStorage.setItem("token", _tokenResponse["idToken"]);
+      this.props.history.push("/");
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      const errors = { ...this.state.errors };
+      errors.email = errorMessage;
+      this.setState({ errors });
+    }
   }
 
   render() {
