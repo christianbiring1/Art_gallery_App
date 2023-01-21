@@ -25,7 +25,6 @@ class SignInForm extends Form {
       const { email, password } = this.state.data;
       const { _tokenResponse } = await login(email, password);
       localStorage.setItem("token", _tokenResponse['idToken']);
-      localStorage.setItem('isAuth', true);
       window.location = "/";
     } catch (error) {
       const errorCode = error.code;
