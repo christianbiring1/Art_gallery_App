@@ -35,7 +35,7 @@ class SignUpForm extends Form {
     try {
       const { _tokenResponse } = await createUserWithEmailAndPassword(auth, email, password);
       localStorage.setItem("token", _tokenResponse["idToken"]);
-      this.props.history.push("/");
+      window.location = "/";
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
