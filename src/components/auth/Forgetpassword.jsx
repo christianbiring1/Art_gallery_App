@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Joi from 'joi-browser';
 import { sendPasswordResetEmail } from "firebase/auth";
@@ -33,9 +33,8 @@ class ForgetPassword extends Form {
       })
       .catch((error) => {
         const errorCode = error.code;
-        const errorMessage = error.message;
         const errors = { ...this.state.errors };
-        errors.email = errorMessage;
+        errors.email = errorCode;
         this.setState({ errors });
       });
   }

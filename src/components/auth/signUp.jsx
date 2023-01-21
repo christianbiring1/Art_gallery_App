@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Joi from 'joi-browser';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
@@ -38,9 +38,8 @@ class SignUpForm extends Form {
       window.location = "/";
     } catch (error) {
       const errorCode = error.code;
-      const errorMessage = error.message;
       const errors = { ...this.state.errors };
-      errors.email = errorMessage;
+      errors.email = errorCode;
       this.setState({ errors });
     }
   }
