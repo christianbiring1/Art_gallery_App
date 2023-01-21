@@ -31,9 +31,9 @@ function App() {
           <Route path="/sign_in" component={SignInForm} />
           <Route path="/forget_password" component={ForgetPassword} />
           <Route path="/log_out" component={Logout} />
-          <Route path="/posts" component={Home} />
-          <Route path="/new" component={CreatePost} />
+          <Route path="/posts/new" component={CreatePost} />
           <Route path="/not_found" component={NotFound} />
+          <Route path="/posts" exact component={Home} />
           <Redirect from="/" to="posts" />
           <Redirect to="/not_found" />
         </Switch>
