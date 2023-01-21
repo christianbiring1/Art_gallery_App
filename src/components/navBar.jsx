@@ -8,8 +8,8 @@ const NavBar = () => {
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
-      <div classNameName="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div classNameName="navbar-nav">
+      <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div className="navbar-nav">
           <NavLink
             className="nav-item nav-link active" to="/"> Home </NavLink>
           <NavLink className="nav-item nav-link" to="/sign_in"> Sign In </NavLink>
