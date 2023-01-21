@@ -12,7 +12,6 @@ const NavBar = ({ user }) => {
         <div className="navbar-nav">
           <NavLink
             className="nav-item nav-link active" to="/"> Home </NavLink>
-          <NavLink className="nav-item nav-link" to="new"> Create Post </NavLink>
           {!user && (
             <React.Fragment>
               <NavLink className="nav-item nav-link" to="/sign_in"> Log In </NavLink>
@@ -22,6 +21,7 @@ const NavBar = ({ user }) => {
           {user && (
             <React.Fragment>
               <NavLink className="nav-item nav-link" to="/profile">{user.email} </NavLink>
+              <NavLink className="nav-item nav-link" to="new"> Create Post </NavLink>
               <NavLink className="nav-item nav-link" to="log_out"> Logout </NavLink>
             </React.Fragment>
           )}
