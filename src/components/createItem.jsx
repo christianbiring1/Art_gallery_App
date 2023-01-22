@@ -2,11 +2,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { addDoc, collection } from 'firebase/firestore';
-import { db, auth } from '../firebase-config';
+import { db, auth, projectStore } from '../firebase-config';
 import Joi from 'joi-browser';
 import Form from './common/Form';
 import FileUpload from '../hooks/Hookstorage';
 import ProgressBar from './progress';
+import { ref } from 'firebase/storage';
+import { uploadBytes } from 'firebase/storage';
+import { getDownloadURL } from 'firebase/storage';
 
 class CreatePost extends Form {
   state = {
@@ -32,8 +35,10 @@ class CreatePost extends Form {
       name: `@${(auth.currentUser.email).slice(0, 3)}`,
       id: auth.currentUser.uid,
     };
-    // const posts = collection(db, "posts");
-    FileUpload(file);
+    const posts = collection(db, "posts");
+    // console.log(FileUpload(file));
+
+
 
 
     const types = ['image/png', 'image/jpeg', 'image/jpg', '.gif'];
@@ -44,13 +49,18 @@ class CreatePost extends Form {
 
 
     try {
-      await addDoc(posts, {
-        title,
-        file,
-        textarea,
-        author
-      });
-      window.location = "/";
+      const imageRef = ref(projectStore, `images/${file.name}`);
+      uploadBytes(imageRef, file).then(async () => {
+        const url = await getDownloadURL(imageRef);
+        console.log(url);
+        await addDoc(posts, {
+          title,
+          url,
+          textarea,
+          author
+        });
+        window.location = "/";
+      })
     } catch (error) {
       const errorCode = error.code;
       console.log(error);

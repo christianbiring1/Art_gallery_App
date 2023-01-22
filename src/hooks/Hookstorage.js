@@ -1,27 +1,23 @@
 /* eslint-disable */
 import { useState, useEffect } from 'react';
-import { ref, uploadBytes } from 'firebase/storage';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { projectStore } from '../firebase-config';
 
 // const projectStore = firebase.getStorage();
 
 const FileUpload = (file) => {
-  const [progress, setProgress] = useState(null);
-  const [error, setError] = useState(null);
-  const [url, setUrl] = useState(null);
 
-  useEffect(() => {
-    // References
+  if (!file) return;
+  // References
 
-    if (!file) return;
+  const imageRef = ref(projectStore, `images/${file.name}`);
 
-    const imageRef = ref(projectStore, `images/${file.name}`);
-    uploadBytes(imageRef, file).then(() => {
-      console.log('Image Uploaded');
-    });
-  }, [])
-
-  return { progress, url, error }
+  let out = '';
+  uploadBytes(imageRef, file).then(async () => {
+    console.log('Image Uploaded');
+    const url = await getDownloadURL(imageRef);
+    out = url;
+  });
 
 }
 
