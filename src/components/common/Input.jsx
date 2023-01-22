@@ -3,17 +3,15 @@
 import React from 'react';
 
 const Input = ({
-  name, label, value, onChange, errors,
+  name, label, errors, ...rest
 }) => (
   <div className="form-group">
     <label htmlFor={name}>{label}</label>
     <input
-      type={name}
-      className="form-control"
-      id={name}
+      {...rest}
       name={name}
-      value={value}
-      onChange={onChange}
+      id={name}
+      className="form-control"
     />
     {errors[name] && <div className="alert alert-danger">{errors[name]}</div>}
   </div>

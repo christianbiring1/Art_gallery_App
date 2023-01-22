@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import Joi from 'joi-browser';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase-config';
-import Input from '../common/Input';
 import Form from '../common/Form';
 
 class SignUpForm extends Form {
@@ -46,40 +45,14 @@ class SignUpForm extends Form {
   };
 
   render() {
-    const { data, errors } = this.state;
-
     return (
       <div className="d-flex flex-column align-items-center justify-content-center">
         <h1>Sign up Form</h1>
         <form onSubmit={this.handleSubmit}>
-          <Input
-            name="email"
-            value={data.email}
-            label="Email address"
-            onChange={this.handleChange}
-            errors={errors}
-          />
-          <Input
-            name="password"
-            value={data.password}
-            label="Password"
-            onChange={this.handleChange}
-            errors={errors}
-          />
-          <Input
-            name="password_confirm"
-            value={data.password_confirm}
-            label="Password Confirmation"
-            onChange={this.handleChange}
-            errors={errors}
-          />
-          <button
-            type="submit"
-            className="btn btn-primary"
-            disabled={this.validate()}
-          >
-            Sign Up
-          </button>
+          {this.renderInput('email', 'Email address', 'email')}
+          {this.renderInput('password', 'Password', 'password')}
+          {this.renderInput('password_confirm', 'Password Confirmation', 'password')}
+          {this.renderButton('Sign Up')}
           <div className="form-group">
             Already have an account?
             {' '}
