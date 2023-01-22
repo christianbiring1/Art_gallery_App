@@ -24,18 +24,27 @@ class CreatePost extends Form {
   };
 
   doSubmit = async () => {
-    const { title, file, textarea } = this.state;
-    // const post = collection(db, "posts")
-    console.log(this.state);
+    const { title, file, textarea } = this.state.data;
+    const author = {
+      name: `@${(auth.currentUser.email).slice(0, 3)}`,
+      id: auth.currentUser.uid,
+    };
+    const posts = collection(db, "posts");
     try {
-      // await addDoc(post, { title, file, textarea })
-      const author = {
-        name: `@${(auth.currentUser.email).slice(0, 3)}`,
-        id: auth.currentUser.uid,
-      }
-      console.log(author);
+      console.log(title, file, textarea);
+      await addDoc(posts, {
+        title,
+        file,
+        textarea,
+        author
+      });
+      window.location = "/";
     } catch (error) {
-
+      const errorCode = error.code;
+      console.log(error);
+      const errors = { ...this.state.errors };
+      errors.title = errorCode;
+      this.setState({ errors });
     }
   };
 
