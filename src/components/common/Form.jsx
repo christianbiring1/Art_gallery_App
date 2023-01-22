@@ -1,22 +1,22 @@
-/* eslint-disable */
-
 import React, { Component } from 'react';
 import Joi from 'joi-browser';
 import Input from './Input';
 import Textarea from './textarea';
 
 class Form extends Component {
+  // eslint-disable-next-line
   state = {
     data: {},
     errors: {},
   };
 
   validate = () => {
-    const result = Joi.validate(this.state.data, this.schema, { abortEarly: false });
+    const { data } = this.state;
+    const result = Joi.validate(data, this.schema, { abortEarly: false });
     if (!result.error) return null;
 
     const errors = {};
-    for (const item of result.error.details) { errors[item.path[0]] = item.message; }
+    for (const item of result.error.details) { errors[item.path[0]] = item.message; } // eslint-disable-line
     return errors;
   };
 
@@ -37,33 +37,31 @@ class Form extends Component {
   };
 
   handleChange = ({ currentTarget: input }) => {
-    const errors = { ...this.state.errors };
+    const errors = { ...this.state.errors };  // eslint-disable-line
     const errorMessage = this.validateProperty(input);
     if (errorMessage) errors[input.name] = errorMessage;
     else delete errors[input.name];
 
-    const data = { ...this.state.data };
+    const data = { ...this.state.data }; // eslint-disable-line
     data[input.name] = input.value;
 
     this.setState({ data, errors });
   };
 
   handleFile = ({ currentTarget: input }) => {
-    const errors = { ...this.state.errors };
+    const errors = { ...this.state.errors };  // eslint-disable-line
     const errorMessage = this.validateProperty(input);
     if (errorMessage) errors[input.name] = errorMessage;
     else delete errors[input.name];
 
-
     // Grabbing the Uploadded File (Image)
-    const data = { ...this.state.data };
-    data[input.name] = input.files[0];
+    const data = { ...this.state.data }; // eslint-disable-line
+    data[input.name] = input.files[0];   // eslint-disable-line 
     // If the user try to upload and cancel we don't want to set the state.
     if (input.files[0]) {
       this.setState({ data, errors });
-      console.log(data);
     }
-  }
+  };
 
   renderButton(label) {
     return (
@@ -74,8 +72,8 @@ class Form extends Component {
       >
         {label}
       </button>
-    )
-  };
+    );
+  }
 
   renderInput(name, label, type = 'text') {
     const { data, errors } = this.state;
@@ -89,11 +87,11 @@ class Form extends Component {
         onChange={this.handleChange}
         errors={errors}
       />
-    )
+    );
   }
 
   renderFile(name, label, type) {
-    const { data, errors } = this.state;
+    const { data, errors } = this.state; // eslint-disable-line
 
     return (
       <Input
@@ -104,7 +102,7 @@ class Form extends Component {
         onChange={this.handleFile}
         errors={errors}
       />
-    )
+    );
   }
 
   renderTextarea(name, label) {
@@ -118,8 +116,7 @@ class Form extends Component {
         onChange={this.handleChange}
         errors={errors}
       />
-    )
-
+    );
   }
 }
 

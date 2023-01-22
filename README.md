@@ -15,7 +15,7 @@ This project is about building a mobile web application Art gallery App where au
 
 ## Live Demo
 
-You can check the live demo of my project [here](https://chris-metrics-webapp.herokuapp.com/)
+You can check the live demo of my project [Not yet availbale]()
 
 
 ## Set up
