@@ -5,8 +5,6 @@ import { addDoc, collection } from 'firebase/firestore';
 import { db, auth, projectStore } from '../firebase-config';
 import Joi from 'joi-browser';
 import Form from './common/Form';
-import FileUpload from '../hooks/Hookstorage';
-import ProgressBar from './progress';
 import { ref } from 'firebase/storage';
 import { uploadBytes } from 'firebase/storage';
 import { getDownloadURL } from 'firebase/storage';
@@ -85,7 +83,6 @@ class CreatePost extends Form {
         <form onSubmit={this.handleSubmit}>
           {this.renderInput('title', 'Title')}
           {this.renderFile('file', 'Photo', 'file')}
-          {file && <ProgressBar file={file} />}
           {this.renderTextarea('textarea', 'Image Description')}
           {this.renderButton('Save')}
           <div className="form-group">
