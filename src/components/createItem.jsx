@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Joi from 'joi-browser';
-import { addDoc, collection, ref } from 'firebase/firestore';
-import { uploadBytes, getDownloadURL } from 'firebase/storage';
+import { addDoc, collection } from 'firebase/firestore';
+import { uploadBytes, getDownloadURL, ref } from 'firebase/storage';
 import { db, auth, projectStore } from '../firebase-config';
 import Form from './common/Form';
 
