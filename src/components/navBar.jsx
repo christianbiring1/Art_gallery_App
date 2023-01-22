@@ -3,11 +3,6 @@ import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 
 const NavBar = ({ user }) => {
-  let handler = '';
-  if (user) {
-    const { email } = user;
-    handler = email.slice(0, 3).toUpperCase();
-  }
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -35,7 +30,7 @@ const NavBar = ({ user }) => {
           {user && (
             <>
               <NavLink className="nav-item nav-link" to="/profile">
-                <span>{handler}</span>
+                <span>My Profile</span>
               </NavLink>
               <NavLink className="nav-item nav-link" to="/posts/new"> Create Post </NavLink>
               <NavLink className="nav-item nav-link" to="/log_out">

@@ -47,11 +47,11 @@ class CreatePost extends Form {
       this.setState({ errors });
     }
   };
-  // Redirect uaser to home page is not logged In.
+  // Redirect uaser to log In page if not logged In.
   componentDidMount() {
     const isAuth = localStorage.getItem("token");
     if (!isAuth) {
-      this.props.history.push('/');
+      this.props.history.push('/sign_in');
     }
   }
 
