@@ -5,6 +5,8 @@ import { addDoc, collection } from 'firebase/firestore';
 import { db, auth } from '../firebase-config';
 import Joi from 'joi-browser';
 import Form from './common/Form';
+import FileUpload from '../hooks/Hookstorage';
+import ProgressBar from './progress';
 
 class CreatePost extends Form {
   state = {
@@ -30,7 +32,9 @@ class CreatePost extends Form {
       name: `@${(auth.currentUser.email).slice(0, 3)}`,
       id: auth.currentUser.uid,
     };
-    const posts = collection(db, "posts");
+    // const posts = collection(db, "posts");
+    FileUpload(file);
+
 
     const types = ['image/png', 'image/jpeg', 'image/jpg', '.gif'];
     if (types.includes(!file.type)) {
@@ -64,12 +68,14 @@ class CreatePost extends Form {
   }
 
   render() {
+    const { file } = this.state.data;
     return (
       <div className="d-flex flex-column align-items-center justify-content-center">
         <h1>Create an Item</h1>
         <form onSubmit={this.handleSubmit}>
           {this.renderInput('title', 'Title')}
           {this.renderFile('file', 'Photo', 'file')}
+          {file && <ProgressBar file={file} />}
           {this.renderTextarea('textarea', 'Image Description')}
           {this.renderButton('Save')}
           <div className="form-group">

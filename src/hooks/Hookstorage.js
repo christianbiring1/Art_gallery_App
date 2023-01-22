@@ -1,10 +1,9 @@
 /* eslint-disable */
 import { useState, useEffect } from 'react';
-import * as firebase from 'firebase/app';
-import 'firebase/storage';
-import 'firebase/firestore';
+import { ref, uploadBytes } from 'firebase/storage';
+import { projectStore } from '../firebase-config';
 
-const projectStore = firebase.storage();
+// const projectStore = firebase.getStorage();
 
 const FileUpload = (file) => {
   const [progress, setProgress] = useState(null);
@@ -13,18 +12,14 @@ const FileUpload = (file) => {
 
   useEffect(() => {
     // References
-    const storageRef = projectStore.ref(file.name);
 
-    storageRef.put(file).on('state_changed', (snap) => {
-      let percentage = (snap.bytesTransferred / snap.totalBytes) * 100;
-      setProgress(percentage);
-    }, (error) => {
-      setError(error);
-    }, async () => {
-      const url = await storageRef.getDownloadURL();
-      setUrl(url);
-    })
-  }, [file])
+    if (!file) return;
+
+    const imageRef = ref(projectStore, `images/${file.name}`);
+    uploadBytes(imageRef, file).then(() => {
+      console.log('Image Uploaded');
+    });
+  }, [])
 
   return { progress, url, error }
 
