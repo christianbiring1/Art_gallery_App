@@ -24,7 +24,7 @@ class SignUpForm extends Form {
   };
 
   doSubmit = async () => {
-    //  Call the Server
+    //  Call the Server: Register an user account
     const { email, password, password_confirm } = this.state.data;
     if (password !== password_confirm) {
       const errors = { ...this.state.errors };

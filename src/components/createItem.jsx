@@ -24,6 +24,7 @@ class CreatePost extends Form {
   };
 
   doSubmit = async () => {
+    // Post to the server
     const { title, file, textarea } = this.state.data;
     const author = {
       name: `@${(auth.currentUser.email).slice(0, 3)}`,
@@ -31,7 +32,6 @@ class CreatePost extends Form {
     };
     const posts = collection(db, "posts");
     try {
-      console.log(title, file, textarea);
       await addDoc(posts, {
         title,
         file,
@@ -47,6 +47,13 @@ class CreatePost extends Form {
       this.setState({ errors });
     }
   };
+  // Redirect uaser to home page is not logged In.
+  componentDidMount() {
+    const isAuth = localStorage.getItem("token");
+    if (!isAuth) {
+      this.props.history.push('/');
+    }
+  }
 
   render() {
     return (
