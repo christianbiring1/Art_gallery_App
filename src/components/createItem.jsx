@@ -1,8 +1,8 @@
+/* eslint-disable */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Joi from 'joi-browser';
 import Form from './common/Form';
-// import Input from './common/Input';
 
 class CreatePost extends Form {
   state = {
@@ -21,6 +21,10 @@ class CreatePost extends Form {
     file: Joi.string().required().label('Image'),
   };
 
+  doSubmit = () => {
+    console.log('Submited!');
+  };
+
   render() {
     return (
       <div className="d-flex flex-column align-items-center justify-content-center">
@@ -28,10 +32,10 @@ class CreatePost extends Form {
         <form onSubmit={this.handleSubmit}>
           {this.renderInput('title', 'Title')}
           {this.renderInput('file', 'Photo', 'file')}
-          {this.renderInput('textarea', 'Image Description', 'textarea')}
-          {this.renderButton('Log In')}
+          {this.renderTextarea('textarea', 'Image Description')}
+          {this.renderButton('Save')}
           <div className="form-group">
-            <Link to="/forget_password">Forget Password?</Link>
+            <Link to="/">See all posts</Link>
           </div>
         </form>
       </div>
