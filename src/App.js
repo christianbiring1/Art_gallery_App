@@ -10,7 +10,7 @@ import ForgetPassword from './components/auth/Forgetpassword';
 import Logout from './components/auth/logout';
 import CreatePost from './components/createItem';
 import NotFound from './components/ntFound';
-
+import './App.css';
 
 function App() {
   const [user, setUser] = useState(null);

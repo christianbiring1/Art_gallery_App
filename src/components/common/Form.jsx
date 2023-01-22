@@ -48,6 +48,23 @@ class Form extends Component {
     this.setState({ data, errors });
   };
 
+  handleFile = ({ currentTarget: input }) => {
+    const errors = { ...this.state.errors };
+    const errorMessage = this.validateProperty(input);
+    if (errorMessage) errors[input.name] = errorMessage;
+    else delete errors[input.name];
+
+
+    // Grabbing the Uploadded File (Image)
+    const data = { ...this.state.data };
+    data[input.name] = input.files[0];
+    // If the user try to upload and cancel we don't want to set the state.
+    if (input.files[0]) {
+      this.setState({ data, errors });
+      console.log(data);
+    }
+  }
+
   renderButton(label) {
     return (
       <button
@@ -70,6 +87,21 @@ class Form extends Component {
         value={data[name]}
         label={label}
         onChange={this.handleChange}
+        errors={errors}
+      />
+    )
+  }
+
+  renderFile(name, label, type) {
+    const { data, errors } = this.state;
+
+    return (
+      <Input
+        type={type}
+        name={name}
+        // value={data[name].name}
+        label={label}
+        onChange={this.handleFile}
         errors={errors}
       />
     )

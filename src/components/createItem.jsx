@@ -20,7 +20,7 @@ class CreatePost extends Form {
     title: Joi.string().required().label('Title'),
     textarea: Joi.string().required().min(20).max(500)
       .label('Description'),
-    file: Joi.string().required().label('Image'),
+    file: Joi.required().label('Image')
   };
 
   doSubmit = async () => {
@@ -31,6 +31,7 @@ class CreatePost extends Form {
       id: auth.currentUser.uid,
     };
     const posts = collection(db, "posts");
+    console.log(file);
     try {
       await addDoc(posts, {
         title,
@@ -61,7 +62,7 @@ class CreatePost extends Form {
         <h1>Create an Item</h1>
         <form onSubmit={this.handleSubmit}>
           {this.renderInput('title', 'Title')}
-          {this.renderInput('file', 'Photo', 'file')}
+          {this.renderFile('file', 'Photo', 'file')}
           {this.renderTextarea('textarea', 'Image Description')}
           {this.renderButton('Save')}
           <div className="form-group">
