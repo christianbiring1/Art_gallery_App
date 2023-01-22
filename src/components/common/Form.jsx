@@ -1,10 +1,14 @@
+/* eslint-disable */
+
 import React, { Component } from 'react';
 import Joi from 'joi-browser';
+import Input from './Input';
+import Textarea from './textarea';
 
 class Form extends Component {
   state = {
     data: {},
-    errors: {}
+    errors: {},
   };
 
   validate = () => {
@@ -12,8 +16,7 @@ class Form extends Component {
     if (!result.error) return null;
 
     const errors = {};
-    for (let item of result.error.details)
-      errors[item.path[0]] = item.message;
+    for (const item of result.error.details) { errors[item.path[0]] = item.message; }
     return errors;
   };
 
@@ -39,11 +42,84 @@ class Form extends Component {
     if (errorMessage) errors[input.name] = errorMessage;
     else delete errors[input.name];
 
-
     const data = { ...this.state.data };
     data[input.name] = input.value;
 
     this.setState({ data, errors });
+  };
+
+  handleFile = ({ currentTarget: input }) => {
+    const errors = { ...this.state.errors };
+    const errorMessage = this.validateProperty(input);
+    if (errorMessage) errors[input.name] = errorMessage;
+    else delete errors[input.name];
+
+
+    // Grabbing the Uploadded File (Image)
+    const data = { ...this.state.data };
+    data[input.name] = input.files[0];
+    // If the user try to upload and cancel we don't want to set the state.
+    if (input.files[0]) {
+      this.setState({ data, errors });
+      console.log(data);
+    }
+  }
+
+  renderButton(label) {
+    return (
+      <button
+        type="submit"
+        className="btn btn-primary"
+        disabled={this.validate()}
+      >
+        {label}
+      </button>
+    )
+  };
+
+  renderInput(name, label, type = 'text') {
+    const { data, errors } = this.state;
+
+    return (
+      <Input
+        type={type}
+        name={name}
+        value={data[name]}
+        label={label}
+        onChange={this.handleChange}
+        errors={errors}
+      />
+    )
+  }
+
+  renderFile(name, label, type) {
+    const { data, errors } = this.state;
+
+    return (
+      <Input
+        type={type}
+        name={name}
+        // value={data[name].name}
+        label={label}
+        onChange={this.handleFile}
+        errors={errors}
+      />
+    )
+  }
+
+  renderTextarea(name, label) {
+    const { data, errors } = this.state;
+
+    return (
+      <Textarea
+        name={name}
+        value={data[name]}
+        label={label}
+        onChange={this.handleChange}
+        errors={errors}
+      />
+    )
+
   }
 }
 
