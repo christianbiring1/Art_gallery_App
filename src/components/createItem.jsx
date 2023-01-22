@@ -31,7 +31,14 @@ class CreatePost extends Form {
       id: auth.currentUser.uid,
     };
     const posts = collection(db, "posts");
-    console.log(file);
+
+    const types = ['image/png', 'image/jpeg', 'image/jpg', '.gif'];
+    if (types.includes(!file.type)) {
+      console.log('Wrong file');
+      return
+    };
+
+
     try {
       await addDoc(posts, {
         title,
@@ -44,7 +51,7 @@ class CreatePost extends Form {
       const errorCode = error.code;
       console.log(error);
       const errors = { ...this.state.errors };
-      errors.title = errorCode;
+      errors.file = errorCode;
       this.setState({ errors });
     }
   };
