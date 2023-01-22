@@ -5,11 +5,11 @@ import { auth } from '../../firebase-config';
 const Logout = () => {
   useEffect(() => {
     signOut(auth).then(() => {
-      localStorage.removeItem("token");
-      window.location = "/";
-    })
+      localStorage.removeItem('token');
+      window.location = '/';
+    });
   }, []);
   return null;
-}
+};
 
 export default Logout;

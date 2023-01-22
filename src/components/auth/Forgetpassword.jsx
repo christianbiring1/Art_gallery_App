@@ -1,11 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Joi from 'joi-browser';
-import { sendPasswordResetEmail } from "firebase/auth";
-import { auth } from "../../firebase-config";
-import Form from "../common/Form";
-import Input from "../common/Input";
-
+import { sendPasswordResetEmail } from 'firebase/auth';
+import { auth } from '../../firebase-config';
+import Form from '../common/Form';
+import Input from '../common/Input';
 
 class ForgetPassword extends Form {
   state = {
@@ -13,23 +12,23 @@ class ForgetPassword extends Form {
       email: '',
     },
     errors: {},
-    notification: {}
-  }
+    notification: {},
+  };
 
   schema = {
-    email: Joi.string().required().email().label("Email")
-  }
+    email: Joi.string().required().email().label('Email'),
+  };
 
   doSubmit = async () => {
     const { email } = this.state.data;
     sendPasswordResetEmail(auth, email)
       .then(() => {
         const notification = { ...this.state.notification };
-        notification.message = "Password reset email sent!";
+        notification.message = 'Password reset email sent!';
         this.setState({ notification });
         setTimeout(() => {
-          this.props.history.push("/");
-        }, "5000")
+          this.props.history.push('/');
+        }, '5000');
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -37,15 +36,15 @@ class ForgetPassword extends Form {
         errors.email = errorCode;
         this.setState({ errors });
       });
-  }
+  };
 
   render() {
     const { data, errors, notification } = this.state;
     return (
-      <div className='d-flex flex-column align-items-center justify-content-center'>
+      <div className="d-flex flex-column align-items-center justify-content-center">
         <h1>Reset Password</h1>
         <form onSubmit={this.handleSubmit}>
-          {notification["message"] && <div className='alert alert-success'>{notification["message"]}</div>}
+          {notification.message && <div className="alert alert-success">{notification.message}</div>}
           <Input
             name="email"
             value={data.email}
@@ -55,13 +54,15 @@ class ForgetPassword extends Form {
           />
           <button
             type="submit"
-            className='btn btn-primary'
+            className="btn btn-primary"
             disabled={this.validate()}
           >
             Reset Password
           </button>
-          <div className='form-group'>
-            Already have an account? <Link to="/sign_in">Log In</Link>
+          <div className="form-group">
+            Already have an account?
+            {' '}
+            <Link to="/sign_in">Log In</Link>
           </div>
         </form>
       </div>
