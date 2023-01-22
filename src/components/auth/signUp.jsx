@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Joi from 'joi-browser';
@@ -25,8 +23,8 @@ class SignUpForm extends Form {
 
   doSubmit = async () => {
     //  Call the Server: Register an user account
-    const { email, password, password_confirm } = this.state.data;
-    if (password !== password_confirm) {
+    const { email, password, password_confirm } = this.state.data; // eslint-disable-line camelcase
+    if (password !== password_confirm) { // eslint-disable-line camelcase
       const errors = { ...this.state.errors };
       errors.password_confirm = 'The password should match';
       this.setState({ errors });

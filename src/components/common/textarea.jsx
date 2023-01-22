@@ -1,14 +1,12 @@
-/* eslint-disable */
-
 import React from 'react';
 
 const Textarea = ({
-  name, label, errors, ...rest
+  name, label, errors, ...rest  // eslint-disable-line
 }) => (
   <div className="form-group">
     <label htmlFor={name}>{label}</label>
     <textarea
-      {...rest}
+      {...rest}  // eslint-disable-line
       name={name}
       id={name}
       className="form-control"
