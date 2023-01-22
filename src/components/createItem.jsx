@@ -1,6 +1,8 @@
 /* eslint-disable */
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { addDoc, collection } from 'firebase/firestore';
+import { db, auth } from '../firebase-config';
 import Joi from 'joi-browser';
 import Form from './common/Form';
 
@@ -21,8 +23,20 @@ class CreatePost extends Form {
     file: Joi.string().required().label('Image'),
   };
 
-  doSubmit = () => {
-    console.log('Submited!');
+  doSubmit = async () => {
+    const { title, file, textarea } = this.state;
+    // const post = collection(db, "posts")
+    console.log(this.state);
+    try {
+      // await addDoc(post, { title, file, textarea })
+      const author = {
+        name: `@${(auth.currentUser.email).slice(0, 3)}`,
+        id: auth.currentUser.uid,
+      }
+      console.log(author);
+    } catch (error) {
+
+    }
   };
 
   render() {
