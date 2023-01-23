@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useState, useEffect } from 'react';
 import { collection, deleteDoc, doc, getDocs } from 'firebase/firestore';
-import { db } from '../firebase-config';
+import { auth, db } from '../firebase-config';
 
 
 const MyProfile = () => {
@@ -21,12 +21,13 @@ const MyProfile = () => {
   const deletePost = async (id) => {
     const postDoc = doc(db, "posts", id)
     await deleteDoc(postDoc);
-  }
+  };
+  const userPosts = postsList.filter((post) => post.author.id === auth.currentUser.uid);
   return (
     <div className="container">
       <h1>My Profile</h1>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)' }}>
-        {postsList.map((post, index) => (
+        {userPosts.map((post, index) => (
           <div key={post.id} className="centered-content" style={{ gridColumn: `${index + 1} / span 1` }}>
             <div className=" card">
               <img src={post.url} alt="card cap" />
@@ -39,11 +40,11 @@ const MyProfile = () => {
                     {' '}
                   </small>
                   <small className="text-muted" style={{ fontWeight: 'bold' }}>
-                    {post.author.name}
+                    me
                   </small>
                 </p>
               </div>
-              <button onClick={() => { deletePost(post.id) }}>Delete</button>
+              <button className='btn btn-danger' onClick={() => { deletePost(post.id) }}>Delete</button>
             </div>
           </div>
         ))}
