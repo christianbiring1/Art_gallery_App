@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../firebase-config';
+import MyProfile from './Profile';
 
 const Home = () => {
   const [postsList, setPostsList] = useState([]);
@@ -22,7 +23,7 @@ const Home = () => {
         {postsList.map((post, index) => (
           <div key={post.id} className="centered-content" style={{ gridColumn: `${index + 1} / span 1` }}>
             <div className=" card">
-              <img src={post.file} alt="card cap" />
+              <img src={post.url} alt="card cap" />
               <div className="card-body">
                 <h5 className="card-title">{post.title}</h5>
                 <p className="card-text">{post.textarea}</p>
@@ -40,6 +41,7 @@ const Home = () => {
           </div>
         ))}
       </div>
+      <MyProfile posts={postsList} />
     </div>
   );
 };

@@ -3,12 +3,13 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 import Home from './components/home';
 import NavBar from './components/navBar';
+import CreatePost from './components/createItem';
+import NotFound from './components/ntFound';
+import MyProfile from './components/Profile';
 import SignInForm from './components/auth/signIn';
 import SignUpForm from './components/auth/signUp';
 import ForgetPassword from './components/auth/Forgetpassword';
 import Logout from './components/auth/logout';
-import CreatePost from './components/createItem';
-import NotFound from './components/ntFound';
 import './App.css';
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
         <Route path="/forget_password" component={ForgetPassword} />
         <Route path="/log_out" component={Logout} />
         <Route path="/posts/new" component={CreatePost} />
+        <Route path="/profile" component={MyProfile} />
         <Route path="/not_found" component={NotFound} />
         <Route path="/posts" exact component={Home} />
         <Redirect from="/" to="posts" />
