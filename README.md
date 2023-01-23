@@ -34,6 +34,13 @@ npm install
 # Start the project by running
 npm start`
 ```
+
+## Testing
+
+```sh
+# To test the App after installing the third party dependency You may consider running
+npm run test
+```
 ## Author
 
 👤 **Christian biringanine**
