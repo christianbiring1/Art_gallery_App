@@ -1,8 +1,8 @@
-/* eslint-disable */
 import React, { useState, useEffect } from 'react';
-import { collection, deleteDoc, doc, getDocs } from 'firebase/firestore';
+import {
+  collection, deleteDoc, doc, getDocs,
+} from 'firebase/firestore';
 import { auth, db } from '../firebase-config';
-
 
 const MyProfile = () => {
   const [postsList, setPostsList] = useState([]);
@@ -19,19 +19,19 @@ const MyProfile = () => {
   }, [allPosts]);
 
   const deletePost = async (id) => {
-    const postDoc = doc(db, "posts", id)
+    const postDoc = doc(db, 'posts', id);
     await deleteDoc(postDoc);
   };
   const userPosts = postsList.filter((post) => post.author.id === auth.currentUser.uid);
   return (
     <div className="container">
       <h1>My Profile</h1>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)' }}>
-        {userPosts.map((post, index) => (
-          <div key={post.id} className="centered-content" style={{ gridColumn: `${index + 1} / span 1` }}>
-            <div className=" card">
-              <img src={post.url} alt="card cap" />
-              <div className="card-body">
+      <div className="card-container">
+        {userPosts.map((post) => (
+          <div key={post.id} className="card">
+            <div className="card-body">
+              <img src={post.url} alt={`${post.author.name} post`} className="card-img" />
+              <div className="">
                 <h5 className="card-title">{post.title}</h5>
                 <p className="card-text">{post.textarea}</p>
                 <p className="card-text">
@@ -43,14 +43,14 @@ const MyProfile = () => {
                     me
                   </small>
                 </p>
+                <button type="button" className="btn btn-danger" onClick={() => { deletePost(post.id); }}>Delete</button>
               </div>
-              <button className='btn btn-danger' onClick={() => { deletePost(post.id) }}>Delete</button>
             </div>
           </div>
         ))}
       </div>
     </div>
   );
-}
+};
 
 export default MyProfile;

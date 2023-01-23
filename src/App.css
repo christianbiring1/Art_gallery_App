@@ -1,3 +1,42 @@
 .centered-content {
   text-align: center;
 }
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card {
+  flex: 1;
+  max-width: 33.33%;
+  height: 300px;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  /* 3 cards in a row on large screens */
+}
+
+.card-title,
+.card-description {
+  text-align: center;
+}
+
+.card-img {
+  width: 300px;
+  height: auto;
+  align-self: center;
+  object-fit: cover;
+}
+
+/* Media query for small screens */
+@media only screen and (max-width: 768px) {
+  .card {
+    max-width: 100%;
+
+    /* Only 1 card in a row on small screens */
+  }
+}
