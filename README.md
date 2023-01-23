@@ -20,11 +20,20 @@ You can check the live demo of my project [Not yet availbale]()
 
 ## Set up
 
-- `git clone git@github.com:christianbiring1/Art_gallery_App.git`
-- `npm install`
-- `cd art_gallery_app`
-- `npm start`
+```sh
+# Clone the repo all the way down in your local environment.
 
+git clone git@github.com:christianbiring1/Art_gallery_App.git
+
+# Navigate to the cloned diretory by running
+cd art_gallery_app
+
+# Install all the third party depencies
+npm install
+
+# Start the project by running
+npm start`
+```
 ## Author
 
 👤 **Christian biringanine**
