@@ -33,7 +33,7 @@ function App() {
         <Route path="/posts/new" component={CreatePost} />
         <Route path="/profile" component={MyProfile} />
         <Route path="/not_found" component={NotFound} />
-        <Route path="/posts" exact component={Home} />
+        <Route path="/posts" component={Home} />
         <Redirect from="/" to="posts" />
         <Redirect to="/not_found" />
       </Switch>
