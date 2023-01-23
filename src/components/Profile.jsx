@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { collection, getDocs } from 'firebase/firestore';
-import { db } from '../firebase-config';
+import {
+  collection, deleteDoc, doc, getDocs,
+} from 'firebase/firestore';
+import { auth, db } from '../firebase-config';
 
-const Home = () => {
+const MyProfile = () => {
   const [postsList, setPostsList] = useState([]);
   const allPosts = collection(db, 'posts');
 
@@ -15,11 +17,17 @@ const Home = () => {
 
     getPosts();
   }, [allPosts]);
+
+  const deletePost = async (id) => {
+    const postDoc = doc(db, 'posts', id);
+    await deleteDoc(postDoc);
+  };
+  const userPosts = postsList.filter((post) => post.author.id === auth.currentUser.uid);
   return (
     <div className="container">
-      <h1>Home</h1>
+      <h1>My Profile</h1>
       <div className="card-container">
-        {postsList.map((post) => (
+        {userPosts.map((post) => (
           <div key={post.id} className="card">
             <div className="card-body">
               <img src={post.url} alt={`${post.author.name} post`} className="card-img" />
@@ -32,9 +40,10 @@ const Home = () => {
                     {' '}
                   </small>
                   <small className="text-muted" style={{ fontWeight: 'bold' }}>
-                    {post.author.name}
+                    me
                   </small>
                 </p>
+                <button type="button" className="btn btn-danger" onClick={() => { deletePost(post.id); }}>Delete</button>
               </div>
             </div>
           </div>
@@ -44,4 +53,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default MyProfile;
