@@ -18,7 +18,7 @@ class CreatePost extends Form {
 
   schema = {
     title: Joi.string().required().label('Title'),
-    textarea: Joi.string().required().min(50).max(500)
+    textarea: Joi.string().required().min(20).max(100)
       .label('Description'),
     file: Joi.required().label('Image'),
   };
