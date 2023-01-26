@@ -23,21 +23,23 @@ function App() {
     } catch (error) { } // eslint-disable-line no-empty
   }, []);
   return (
-    <div className="container">
+    <>
       <NavBar user={user} />
-      <Switch>
-        <Route path="/sign_up" component={SignUpForm} />
-        <Route path="/sign_in" component={SignInForm} />
-        <Route path="/forget_password" component={ForgetPassword} />
-        <Route path="/log_out" component={Logout} />
-        <Route path="/posts/new" component={CreatePost} />
-        <Route path="/profile" component={MyProfile} />
-        <Route path="/not_found" component={NotFound} />
-        <Route path="/posts" component={Home} />
-        <Redirect from="/" to="posts" />
-        <Redirect to="/not_found" />
-      </Switch>
-    </div>
+      <div className="container">
+        <Switch>
+          <Route path="/sign_up" component={SignUpForm} />
+          <Route path="/sign_in" component={SignInForm} />
+          <Route path="/forget_password" component={ForgetPassword} />
+          <Route path="/log_out" component={Logout} />
+          <Route path="/posts/new" component={CreatePost} />
+          <Route path="/profile" component={MyProfile} />
+          <Route path="/not_found" component={NotFound} />
+          <Route path="/posts" component={Home} />
+          <Redirect from="/" to="posts" />
+          <Redirect to="/not_found" />
+        </Switch>
+      </div>
+    </>
   );
 }
 

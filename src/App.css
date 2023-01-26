@@ -20,6 +20,65 @@ body {
   color: var(--color-body);
 }
 
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0 1rem;
+  align-items: center;
+}
+
+.nav__list {
+  width: 100%;
+  list-style: none;
+  margin: 0;
+}
+
+.nav__item {
+  padding: 0.5rem;
+  border-bottom: 1px solid #d2d2d2;
+}
+
+.nav__item > a {
+  color: #000;
+  text-decoration: none;
+  transition: color .3s;
+}
+
+.nav__item>a:hover {
+  color: var(--color-primary);
+}
+
+.nav__toggler {
+  opacity: 0.5;
+  transition: box-shadow .15s;
+  cursor: pointer;
+}
+
+.nav.collapsible--expanded .nav__toggler {
+  opacity: 1;
+  box-shadow: 0 0 0 3px #666;
+  
+}
+
+@media screen and (min-width: 768px) {
+  .nav__toggler {
+    display: none;
+  }
+  
+  .nav__list {
+    width: auto;
+    display: flex;
+    font: 1.6rem;
+    max-height: 100%;
+    opacity: 1;
+  }
+
+  .nav__item {
+    border: 0;
+  }
+}
+
 .centered-content {
   text-align: center;
 }
@@ -42,7 +101,7 @@ body {
 
 .card-img {
   width: 100%;
-  height: auto;
+  height: 300px;
   object-fit: cover;
   /* position: absolute; */
 }
@@ -60,6 +119,11 @@ body {
  padding-bottom: 10px;
 }
 
+.btn-danger {
+  width: 40%;
+  font-size: 1.5rem;
+}
+
 /* Media query for small screens */
 @media only screen and (max-width: 768px) {
   .card-container {
@@ -68,4 +132,11 @@ body {
 
     /* Only 1 card in a row on small screens */
   }
+
+    .card-img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      /* position: absolute; */
+    }
 }
