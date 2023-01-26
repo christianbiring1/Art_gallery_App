@@ -9,13 +9,9 @@
   --color-body-darker: #5c5577;
 }
 
-html {
-  font-size: 62.5%;
-}
-
 body {
   font-family: Inter, Arial, Helvetica, sans-serif;
-  font-size: 1.8rem;
+  font-size: 18px;
   line-height: 1.5;
   color: var(--color-body);
 }
@@ -24,7 +20,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 0 1rem;
+  padding: 0 10px;
   align-items: center;
 }
 
@@ -35,7 +31,7 @@ body {
 }
 
 .nav__item {
-  padding: 0.5rem;
+  padding: 5px;
   border-bottom: 1px solid #d2d2d2;
 }
 
@@ -68,7 +64,7 @@ body {
   .nav__list {
     width: auto;
     display: flex;
-    font-size: 1.6rem;
+    font-size: 16px;
     max-height: 100%;
     opacity: 1;
   }
@@ -112,7 +108,7 @@ body {
 
 .card-title {
   font-family: 'Montserrat', sans-serif;
-  font-size: 2rem;
+  font-size: 20px;
   font-weight: bold;
   text-transform: capitalize;
   color: var(--color-heading);
@@ -121,8 +117,15 @@ body {
 
 .btn-danger {
   width: 40%;
-  font-size: 1.5rem;
+  font-size: 15px;
 }
+
+.form-group,
+.form-control,
+input {
+  font-size: 18px;
+}
+
 
 /* Media query for small screens */
 @media only screen and (max-width: 768px) {
