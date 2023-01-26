@@ -20,10 +20,10 @@ const Home = () => {
       <h1>Home</h1>
       <div className="card-container">
         {postsList.map((post) => (
-          <div key={post.id} className="card">
-            <div className="card-body">
+          <div key={post.id} className="card--wrap">
+            <div className="card">
               <img src={post.url} alt={`${post.author.name} post`} className="card-img" />
-              <div className="">
+              <div className="card-body">
                 <h5 className="card-title">{post.title}</h5>
                 <p className="card-text">{post.textarea}</p>
                 <p className="card-text">

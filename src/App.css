@@ -1,23 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@500&display=swap');
+
+:root {
+  --color-primary: #2584ff;
+  --color-secondary: #00d9ff;
+  --color-accent: #ff3400;
+  --color-heading: #1b0760;
+  --color-body: #918ca4;
+  --color-body-darker: #5c5577;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: Inter, Arial, Arial, Helvetica, sans-serif;
+  font-size: 1.8rem;
+  line-height: 1.5;
+  color: var(--color-body);
+}
+
 .centered-content {
   text-align: center;
 }
 
-.card-container {
-  display: flex;
-  flex-wrap: wrap;
+.card {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
 
-.card {
-  flex: 1;
-  max-width: 33.33%;
-  height: 300px;
-  overflow: hidden;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-
-  /* 3 cards in a row on large screens */
+.card-container {
+  margin: 20px auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
 }
 
 .card-title,
@@ -26,15 +41,29 @@
 }
 
 .card-img {
-  width: 300px;
+  width: 100%;
   height: auto;
-  align-self: center;
   object-fit: cover;
+  /* position: absolute; */
+}
+
+.card-body {
+  padding: 15px 20px;
+}
+
+.card-title {
+  font-family: 'Montserrat', sans-serif;
+ font-size: 2rem;
+ font-weight: bold;
+ text-transform: capitalize;
+ color: var(--color-heading);
+ padding-bottom: 10px;
 }
 
 /* Media query for small screens */
 @media only screen and (max-width: 768px) {
-  .card {
+  .card-container {
+    grid-template-columns: 1fr;
     max-width: 100%;
 
     /* Only 1 card in a row on small screens */
