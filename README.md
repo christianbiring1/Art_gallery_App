@@ -61,7 +61,6 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
-- Want to acknowledge NGENI for this opportunuity.
 - Hat tip to anyone who will take a glance to this project
 
 ## 📝 License
