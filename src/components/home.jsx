@@ -17,7 +17,7 @@ const Home = () => {
   }, [allPosts]);
   return (
     <div className="container">
-      <h1>Home</h1>
+      <h1>Gallery Feeds</h1>
       <div className="card-container">
         {postsList.map((post) => (
           <div key={post.id} className="card--wrap">

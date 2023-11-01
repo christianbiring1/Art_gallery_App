@@ -12,12 +12,16 @@
 html {
   font-size: 62.5%;
   box-sizing: border-box;
-  font-family: 'Inter', sans-serif, Arial, Helvetica, sans-serif;
+  font-family: Inter, sans-serif, Arial, Helvetica, sans-serif;
 }
 
 body {
   line-height: 1.5;
   color: var(--color-body);
+}
+
+.content-wrapper {
+  /* background: url("../src//assets//backg.avif"); */
 }
 
 .logo {
@@ -31,8 +35,9 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 0 1rem;
+  padding: .5rem 1rem;
   align-items: center;
+  font-family: Inter, sans-serif;
 }
 
 .nav__list {
@@ -59,19 +64,22 @@ body {
 }
 
 .nav__toggler {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   transition: box-shadow 0.15s;
   cursor: pointer;
+  opacity: 0.5;
 }
 
 .collapsible__content {
   max-height: 0;
+  display: none;
   opacity: 0;
 }
 
 .nav.collapsible--expanded .collapsible__content {
   max-height: 100%;
+  display: block;
   opacity: 1;
 }
 
@@ -80,6 +88,66 @@ body {
   box-shadow: 0 0 0 3px #666;
   border-radius: 5px;
 }
+
+/* HOME */
+
+.container {
+  padding-top: 3rem;
+  font-size: 1.6rem;
+  font-family: Inter, sans-serif;
+}
+
+.card-container {
+  width: 85%;
+}
+
+.card {
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: scale(1.01);
+}
+
+.card-body {
+  min-height: 18rem;
+  /* background-color: #d2d2d2; */
+  /* box-shadow: rgba(0, 0, 0, 0.16) 0 10px 36px 0, rgba(0, 0, 0, 0.06) 0 0 0 1px; */
+}
+
+.container h1 {
+  color: var(--color-primary);
+  font-family: Inter, sans-serif;
+}
+
+/* CREATE ITEM */
+
+.create-container {
+  font-family: Inter, sans-serif;
+  width: 60%;
+  margin: 3rem auto;
+  /* background-color: #00d9ff; */
+  min-height: 100vh;
+  font-size: 1.6rem;
+}
+
+.create-container h1 {
+  font-size: 4rem;
+  color: var(--color-primary);
+}
+
+.create-container input {
+  height: 4rem;
+  color: #918ca4;
+  font-size: 1.6rem;
+}
+
+.create-container button {
+  padding: .5rem 1rem;
+  font-size: 1.6rem;
+}
+
+
 
 @media screen and (min-width: 768px) {
   .nav__toggler {
@@ -112,6 +180,7 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 40px;
+  width: 100%;
 }
 
 .card-title,

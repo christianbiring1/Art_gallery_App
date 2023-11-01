@@ -8,8 +8,12 @@ const Textarea = ({
     <textarea
       {...rest}  // eslint-disable-line
       name={name}
+      required
       id={name}
       className="form-control"
+      style={{
+        height: '15rem', marginBottom: '2rem', fontSize: '1.6rem', color: '#918ca4',
+      }}
     />
     {errors[name] && <div className="alert alert-danger">{errors[name]}</div>}
   </div>

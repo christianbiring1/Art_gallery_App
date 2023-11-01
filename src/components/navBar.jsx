@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-// import logo from '../assets/hamburger-menu-96.png';
+import logo from '../assets/hamburger-menu-96.png';
 /*eslint-disable */
 
 const NavBar = ({ user }) => {
@@ -13,7 +13,7 @@ const NavBar = ({ user }) => {
   return (
     <nav className={isOpen ? "nav collapsible" : " nav collapsible collapsible--expanded"}>
       <Link className="logo" to="/">Art_Gallery</Link>
-      <img src="../assets/hamburger-menu-96.png" alt="" className="menu nav__toggler" onClick={handleOpen} />
+      <img src={logo} alt="" className="menu nav__toggler" onClick={handleOpen} />
       <ul className="list nav__list collapsible__content">
         <li className="nav__item">
           <NavLink

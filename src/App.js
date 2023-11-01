@@ -25,7 +25,7 @@ function App() {
   return (
     <>
       <NavBar user={user} />
-      <div className="container">
+      <div className="content-wrapper">
         <Switch>
           <Route path="/sign_up" component={SignUpForm} />
           <Route path="/sign_in" component={SignInForm} />

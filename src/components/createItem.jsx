@@ -18,7 +18,7 @@ class CreatePost extends Form {
 
   schema = {
     title: Joi.string().required().label('Title'),
-    textarea: Joi.string().required().min(20).max(100)
+    textarea: Joi.string().required().min(100)
       .label('Description'),
     file: Joi.required().label('Image'),
   };
@@ -65,8 +65,8 @@ class CreatePost extends Form {
 
   render() {
     return (
-      <div className="d-flex flex-column align-items-center justify-content-center">
-        <h1>Create an Item</h1>
+      <div className="create-container">
+        <h1>Create a Post</h1>
         <form onSubmit={this.handleSubmit}>
           {this.renderInput('title', 'Title')}
           {this.renderFile('file', 'Photo', 'file')}
