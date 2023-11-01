@@ -9,18 +9,29 @@
   --color-body-darker: #5c5577;
 }
 
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif, Arial, Helvetica, sans-serif;
+}
+
 body {
-  font-family: Inter, Arial, Helvetica, sans-serif;
-  font-size: 18px;
   line-height: 1.5;
   color: var(--color-body);
+}
+
+.logo {
+  font-size: 2rem;
+  margin-left: 1rem;
+  text-decoration: none;
+  color: var(--color-heading);
 }
 
 .nav {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding: 0 10px;
+  padding: 0 1rem;
   align-items: center;
 }
 
@@ -28,15 +39,17 @@ body {
   width: 100%;
   list-style: none;
   margin: 0;
+  padding: 0;
+  font-size: 1.6rem;
 }
 
 .nav__item {
-  padding: 5px;
+  padding: 1rem;
   border-bottom: 1px solid #d2d2d2;
 }
 
 .nav__item > a {
-  color: #000;
+  color: var(--color-body-darker);
   text-decoration: none;
   transition: color 0.3s;
 }
@@ -46,14 +59,26 @@ body {
 }
 
 .nav__toggler {
-  opacity: 0.5;
+  width: 50px;
+  height: 50px;
   transition: box-shadow 0.15s;
   cursor: pointer;
+}
+
+.collapsible__content {
+  max-height: 0;
+  opacity: 0;
+}
+
+.nav.collapsible--expanded .collapsible__content {
+  max-height: 100%;
+  opacity: 1;
 }
 
 .nav.collapsible--expanded .nav__toggler {
   opacity: 1;
   box-shadow: 0 0 0 3px #666;
+  border-radius: 5px;
 }
 
 @media screen and (min-width: 768px) {

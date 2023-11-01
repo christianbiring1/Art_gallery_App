@@ -1,51 +1,62 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
+// import logo from '../assets/hamburger-menu-96.png';
+/*eslint-disable */
 
-const NavBar = ({ user }) => (  // eslint-disable-line
-  <nav className="nav collapsible">
-    <Link className="logo" to="/">Art_Gallery</Link>
-    <div className="menu nav__toggler">X</div>
-    <ul className="list nav__list collapsible__content">
-      <li className="nav__item">
-        <NavLink
-          to="/"
-        >
-          {' '}
-          Home
-          {' '}
+const NavBar = ({ user }) => {
+  const [isOpen, setIsOpen] = useState(false);
 
-        </NavLink>
+  const handleOpen = () => {
+    setIsOpen(!isOpen);
+  };
 
-      </li>
-      {!user && (
-      <>
+  return (
+    <nav className={isOpen ? "nav collapsible" : " nav collapsible collapsible--expanded"}>
+      <Link className="logo" to="/">Art_Gallery</Link>
+      <img src="../assets/hamburger-menu-96.png" alt="" className="menu nav__toggler" onClick={handleOpen} />
+      <ul className="list nav__list collapsible__content">
         <li className="nav__item">
-          <NavLink to="/sign_in"> Log In </NavLink>
-        </li>
-        <li className="nav__item">
-          <NavLink to="/sign_up"> Register </NavLink>
-        </li>
-      </>
-      )}
-      {user && (
-      <>
-        <li className="nav__item">
-          <NavLink to="/profile">
-            <span>My Profile</span>
+          <NavLink
+            to="/"
+          >
+            {' '}
+            Home
+            {' '}
+
           </NavLink>
+
         </li>
-        <li className="nav__item">
-          <NavLink to="/posts/new"> Create Post </NavLink>
-        </li>
-        <li className="nav__item">
-          <NavLink to="/log_out">
-            <span className="btn btn-primary">Logout</span>
-          </NavLink>
-        </li>
-      </>
-      )}
-    </ul>
-  </nav>
-);
+        {!user && (
+        <>
+          <li className="nav__item">
+            <NavLink to="/sign_in"> Log In </NavLink>
+          </li>
+          <li className="nav__item">
+            <NavLink to="/sign_up"> Register </NavLink>
+          </li>
+        </>
+        )}
+        {user && (
+        <>
+          <li className="nav__item">
+            <NavLink to="/profile">
+              <span>My Profile</span>
+            </NavLink>
+          </li>
+          <li className="nav__item">
+            <NavLink to="/posts/new"> Create Post </NavLink>
+          </li>
+          <li className="nav__item">
+            <NavLink to="/log_out">
+              <span className="btn btn-primary">Logout</span>
+            </NavLink>
+          </li>
+        </>
+        )}
+      </ul>
+    </nav>
+
+  );
+};
 
 export default NavBar;
