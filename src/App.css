@@ -129,23 +129,23 @@ body {
   margin: 3rem auto;
   /* background-color: #00d9ff; */
   min-height: 100vh;
-  font-size: 1.6rem;
+  /* font-size: 1.6rem; */
 }
 
 .create-container h1 {
-  font-size: 4rem;
+  /* font-size: 4rem; */
   color: var(--color-primary);
 }
 
 .create-container input {
-  height: 4rem;
+  /* height: 4rem; */
   color: #918ca4;
-  font-size: 1.6rem;
+  /* font-size: 1.6rem; */
 }
 
 .create-container button {
   padding: .5rem 1rem;
-  font-size: 1.6rem;
+  /* font-size: 1.6rem; */
 }
 
 

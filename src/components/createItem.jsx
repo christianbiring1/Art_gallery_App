@@ -67,7 +67,7 @@ class CreatePost extends Form {
     return (
       <div className="create-container">
         <h1>Create a Post</h1>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} style={{ width: '100%' }}>
           {this.renderInput('title', 'Title')}
           {this.renderFile('file', 'Photo', 'file')}
           {this.renderTextarea('textarea', 'Image Description')}

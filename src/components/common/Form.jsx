@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Joi from 'joi-browser';
+import { Button } from '@mui/material';
+
 import Input from './Input';
 import Textarea from './textarea';
 
@@ -65,13 +67,16 @@ class Form extends Component {
 
   renderButton(label) {
     return (
-      <button
+      <Button
         type="submit"
-        className="btn btn-primary"
+        // className="btn btn-primary"
+        variant="contained"
+        color="primary"
+        size="large"
         disabled={this.validate()}
       >
         {label}
-      </button>
+      </Button>
     );
   }
 
