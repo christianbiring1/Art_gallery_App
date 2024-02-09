@@ -7,7 +7,6 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
-
 import { db } from '../firebase-config';
 
 const Home = () => {
@@ -28,7 +27,7 @@ const Home = () => {
       <h1>Gallery Feeds</h1>
       <div className="card-container">
         {postsList.map((post) => (
-          <Card key={post.id} sx={{ fontSize: '16px'}} >
+          <Card key={post.id} sx={{ fontSize: '16px' }}>
             <CardHeader
               avatar={(
                 <Avatar sx={{ bgcolor: 'GrayText' }} aria-label="recipe">
@@ -51,6 +50,7 @@ const Home = () => {
             />
             <CardContent>
               <Typography variant="body2" color="text.secondary">
+                { post.textarea }
                 This impressive paella is a perfect party dish and a fun meal to cook
                 together with your guests. Add 1 cup of frozen peas along with the mussels,
                 if you like.

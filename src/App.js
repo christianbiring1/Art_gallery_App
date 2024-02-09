@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import {
+  Route, BrowserRouter, Routes, Navigate,
+} from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 import Home from './components/home';
 import NavBar from './components/navBar';
@@ -24,21 +26,24 @@ function App() {
   }, []);
   return (
     <>
-      <NavBar user={user} />
-      <div className="content-wrapper">
-        <Switch>
-          <Route path="/sign_up" component={SignUpForm} />
-          <Route path="/sign_in" component={SignInForm} />
-          <Route path="/forget_password" component={ForgetPassword} />
-          <Route path="/log_out" component={Logout} />
-          <Route path="/posts/new" component={CreatePost} />
-          <Route path="/profile" component={MyProfile} />
-          <Route path="/not_found" component={NotFound} />
-          <Route path="/posts" component={Home} />
-          <Redirect from="/" to="posts" />
-          <Redirect to="/not_found" />
-        </Switch>
-      </div>
+      <BrowserRouter basename="/">
+        <NavBar user={user} />
+        <div className="content-wrapper">
+          <Routes>
+            <Route path="sign_up" element={<SignUpForm />} />
+            <Route path="sign_in" element={<SignInForm />} />
+            <Route path="forget_password" element={<ForgetPassword />} />
+            <Route path="log_out" element={<Logout />} />
+            <Route path="posts/new" element={<CreatePost />} />
+            <Route path="profile" element={<MyProfile />} />
+            <Route path="not_found" element={<NotFound />} />
+            <Route path="posts" element={<Home />} />
+            {/* <Redirect from="/" to="posts" /> */}
+            {/* <Redirect to="/not_found" /> */}
+            <Route path="/" element={<Navigate to="/posts" />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
     </>
   );
 }
