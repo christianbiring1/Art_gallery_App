@@ -1,7 +1,7 @@
 /*eslint-disable */
 
 import React, { useState } from 'react';
-import { NavLink, Link, withRouter } from 'react-router-dom';
+import { NavLink, Link, useNavigate } from 'react-router-dom';
 import { Box, Avatar, Menu, MenuItem, Divider, Typography, Tooltip,  } from '@mui/material';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import IconButton from '@mui/material/IconButton';
@@ -14,9 +14,8 @@ import logo from '../assets/hamburger-menu-96.png';
 const NavBar = ({ user }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [redirect, setRedirect] = useState(null);
   const open = Boolean(anchorEl);
-  // const history = useHistory()
+  const navigate = useNavigate();
 
   const handleOpen = () => {
     setIsOpen(!isOpen);
@@ -27,13 +26,9 @@ const NavBar = ({ user }) => {
   };
   const handleClose = (path) => () => {
     setAnchorEl(null);
-    setRedirect(path);
-    // history.push(path);
-  };
 
-  if (redirect) {
-    // return <Redirect to={redirect} />;
-  }
+    if(path) navigate(path);
+  };
 
   return (
     <nav className={!isOpen ? "nav collapsible" : " nav collapsible collapsible--expanded"}>
@@ -131,23 +126,23 @@ const NavBar = ({ user }) => {
         <MenuItem onClick={handleClose('/profile')}>
           <Avatar /> Profile
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleClose('/profile')}>
           <Avatar /> My account
         </MenuItem>
         <Divider />
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleClose('/posts/new')}>
           <ListItemIcon>
             <PersonAdd fontSize="small" />
           </ListItemIcon>
           Add another Post
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleClose('/profile')}>
           <ListItemIcon>
             <Settings fontSize="small" />
           </ListItemIcon>
           Settings
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleClose('/log_out')}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>

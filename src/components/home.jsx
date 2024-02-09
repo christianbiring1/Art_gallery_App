@@ -31,7 +31,7 @@ const Home = () => {
             <CardHeader
               avatar={(
                 <Avatar sx={{ bgcolor: 'GrayText' }} aria-label="recipe">
-                  R
+                  {post.author.name[1].toUpperCase()}
                 </Avatar>
               )}
               action={(
@@ -54,6 +54,11 @@ const Home = () => {
                 This impressive paella is a perfect party dish and a fun meal to cook
                 together with your guests. Add 1 cup of frozen peas along with the mussels,
                 if you like.
+              </Typography>
+              <Typography className="text-muted">
+                Posted by
+                { ' ' }
+                <span style={{ fontWeight: 'bold' }}>{post.author.name}</span>
               </Typography>
             </CardContent>
             <CardActions disableSpacing>

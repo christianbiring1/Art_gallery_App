@@ -41,6 +41,7 @@ function App() {
             {/* <Redirect from="/" to="posts" /> */}
             {/* <Redirect to="/not_found" /> */}
             <Route path="/" element={<Navigate to="/posts" />} />
+            <Route path="*" element={<Navigate to="/not_found" />} />
           </Routes>
         </div>
       </BrowserRouter>
