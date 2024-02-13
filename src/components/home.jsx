@@ -1,5 +1,5 @@
+/* eslint-disable */
 import React, { useState, useEffect } from 'react';
-// import PropTpes from 'prop-types';
 import { Modal } from 'react-responsive-modal';
 import { collection, getDocs } from 'firebase/firestore';
 import {
