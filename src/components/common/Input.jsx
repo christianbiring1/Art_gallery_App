@@ -3,7 +3,7 @@ import React from 'react';
 const Input = ({
   name, label, errors, ...rest  // eslint-disable-line
 }) => (
-  <div className="form-group mb-3">
+  <div className="form-group mb-3 input-container">
     <label htmlFor={name}>{label}</label>
     <br />
     <input

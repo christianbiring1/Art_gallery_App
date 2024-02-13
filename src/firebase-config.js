@@ -9,12 +9,12 @@ import { getStorage } from 'firebase/storage';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: 'AIzaSyAv5tEqI1EuJL80nUFMoqgExrTPFh3vvBY',
-  authDomain: 'art-gallery-caa2f.firebaseapp.com',
-  projectId: 'art-gallery-caa2f',
-  storageBucket: 'art-gallery-caa2f.appspot.com',
-  messagingSenderId: '951135626745',
-  appId: '1:951135626745:web:5a129a20f226a41ce00928',
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
 };
 
 // Initialize Firebase
