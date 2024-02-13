@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+// import PropTpes from 'prop-types';
+import { Modal } from 'react-responsive-modal';
 import { collection, getDocs } from 'firebase/firestore';
 import {
   Card, CardHeader, CardMedia, CardContent, CardActions, Avatar, IconButton, Typography,
@@ -9,9 +11,16 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 import { db } from '../firebase-config';
 
-const Home = () => {
+const Home = ({ user }) => {
   const [postsList, setPostsList] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
   const allPosts = collection(db, 'posts');
+
+  const handleOpen = () => {
+    if (!user) {
+      setIsOpen(!isOpen);
+    }
+  };
 
   useEffect(() => {
     const getPosts = async () => {
@@ -63,35 +72,21 @@ const Home = () => {
             </CardContent>
             <CardActions disableSpacing>
               <IconButton aria-label="add to favorites">
-                <FavoriteIcon />
+                <FavoriteIcon onClick={handleOpen} />
               </IconButton>
               <IconButton aria-label="share">
-                <ShareIcon />
+                <ShareIcon onClick={handleOpen} />
               </IconButton>
             </CardActions>
           </Card>
-          // <div key={post.id} className="card--wrap">
-          //   <div className="card">
-          //     <img src={post.url} alt={`${post.author.name} post`} className="card-img" />
-          //     <div className="card-body">
-          //       <h5 className="card-title">{post.title}</h5>
-          //       <p className="card-text">{post.textarea}</p>
-          //       <p className="card-text">
-          //         <small className="text-muted">
-          //           Posted by:
-          //           {' '}
-          //         </small>
-          //         <small className="text-muted" style={{ fontWeight: 'bold' }}>
-          //           {post.author.name}
-          //         </small>
-          //       </p>
-          //     </div>
-          //   </div>
-          // </div>
         ))}
+        <Modal open={isOpen} onClose={handleOpen} center classNames={{ modal: 'custom-modal' }}>
+          <p>You need to be logged in to perform this action</p>
+        </Modal>
       </div>
     </div>
   );
 };
+
 
 export default Home;

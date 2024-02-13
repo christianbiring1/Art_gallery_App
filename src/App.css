@@ -25,11 +25,11 @@ body {
   /* background: url("../src//assets//backg.avif"); */
 }
 
-.logo {
-  font-size: 2rem;
+.logo img {
+  width: 150px;
+  height: 150px;
   margin-left: 1rem;
-  text-decoration: none;
-  color: var(--color-heading);
+  /* color: var(--color-heading); */
 }
 
 .nav {
@@ -148,6 +148,12 @@ body {
   /* font-size: 1.6rem; */
 }
 
+/* MODAL CUSTOM STYLING */
+
+.custom-modal {
+  width: 50%;
+  padding: 1rem;
+}
 
 
 @media screen and (min-width: 768px) {

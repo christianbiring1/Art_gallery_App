@@ -12,6 +12,7 @@ import SignInForm from './components/auth/signIn';
 import SignUpForm from './components/auth/signUp';
 import ForgetPassword from './components/auth/Forgetpassword';
 import Logout from './components/auth/logout';
+import 'react-responsive-modal/styles.css';
 import './App.css';
 
 function App() {
@@ -37,9 +38,7 @@ function App() {
             <Route path="posts/new" element={<CreatePost />} />
             <Route path="profile" element={<MyProfile />} />
             <Route path="not_found" element={<NotFound />} />
-            <Route path="posts" element={<Home />} />
-            {/* <Redirect from="/" to="posts" /> */}
-            {/* <Redirect to="/not_found" /> */}
+            <Route path="posts" element={<Home user={user} />} />
             <Route path="/" element={<Navigate to="/posts" />} />
             <Route path="*" element={<Navigate to="/not_found" />} />
           </Routes>

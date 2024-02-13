@@ -9,7 +9,8 @@ import { PersonAdd } from '@mui/icons-material';
 import { Settings } from '@mui/icons-material';
 import { Logout } from '@mui/icons-material';
 
-import logo from '../assets/hamburger-menu-96.png';
+import hamburger from '../assets/hamburger-menu-96.png';
+import logo from '../assets/emblem-art-gallery_658131-1.jpg';
 
 const NavBar = ({ user }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,8 +33,8 @@ const NavBar = ({ user }) => {
 
   return (
     <nav className={!isOpen ? "nav collapsible" : " nav collapsible collapsible--expanded"}>
-      <Link className="logo" to="/">Art_Gallery</Link>
-      <img src={logo} alt="" className="menu nav__toggler" onClick={handleOpen} />
+      <Link className="logo" to="/"><img src={logo} alt="" /></Link>
+      <img src={hamburger} alt="" className="menu nav__toggler" onClick={handleOpen} />
       <ul className="list nav__list collapsible__content">
         <li className="nav__item">
           <NavLink
