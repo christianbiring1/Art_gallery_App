@@ -6,17 +6,18 @@ This project is about building a mobile web application Art gallery App where au
 
 ## Built With
 
-  `FRONT END`
+`FRONT END`
+
 - ReactJS
 - Bootstrap
 
   `BACKEND`
+
   - Firebase
 
 ## Live Demo
 
-You can check the live demo of my project [Not yet availbale]()
-
+You can check the live demo of my project [CLICK](https://art-gallery-chris.netlify.app/)
 
 ## Set up
 
@@ -41,6 +42,7 @@ npm start`
 # To test the App after installing the third party dependency You may consider running
 npm run test
 ```
+
 ## Author
 
 👤 **Christian biringanine**
